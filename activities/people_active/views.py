@@ -8,5 +8,4 @@ class Index(View):
     def get(self,requests,*args,**kwargs):
         return HttpResponse("Hello world!")
 
-    def __str__(self):
-        return self
+
