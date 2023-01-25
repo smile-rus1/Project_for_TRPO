@@ -9,6 +9,7 @@ urlpatterns = [
     path("login/", login, name="login"),
     path("contact/", contact, name="contact"),
     path("post/<int:post_id>/", show_post, name="post"),
+    path("groups/<int:group_id>/", show_group, name="show_group")
 
 
 ]
