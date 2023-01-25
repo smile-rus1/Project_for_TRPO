@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>{{title}}</h1>
+<ul class="list-articles">
+    {% for act in active %}
+    <li>
+       <div class="article-panel">
+            <p class="first">Группа {{act.group}}</p>
+            <p class="last">Дата создания {{act.update_date|date:"d-m-y"}}</p>
+       </div>
 
+        <h2>{{ act.title }}</h2>
+        <p> {{ act.content|linebreaks|truncatewords:15}} </p>
+        <div class="clear"></div>
+        <p class="link-read-post"><a href="{{ act.get_absolute_url }}">Посмотреть событие</a></p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock content %}
+
