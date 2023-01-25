@@ -12,6 +12,7 @@ from .forms import *
 
 menu = [
     {"title": "События", "url_name": "events"},
+    {"title": "Группы", "url_name": "groups"},
     {"title": "Добавить статью событий", "url_name": "add_page"},
     {"title": "Обратная связь", "url_name": "contact"},
 
@@ -38,8 +39,22 @@ def show_post(request, post_id):
     return HttpResponse(f"Пост {post_id}")
 
 
+def show_group(request, group_id):
+    return HttpResponse(f"Группа {group_id}")
+
+
 def events(request):
-    return render(request, "Events.html")
+    active = Activity.objects.all()
+    group = Groups.objects.all()
+
+    context = {
+        "active": active,
+        "menu": menu,
+        "group": group,
+        "title": "События"
+    }
+
+    return render(request, "Events.html", context=context)
 
 
 def group(request):
@@ -53,7 +68,11 @@ def group(request):
 
 
 def contact(request):
-    return render(request, "Contact.html")
+    context = {
+        "menu": menu,
+        "title": "Контакты"
+    }
+    return render(request, "Contact.html",context=context)
 
 
 def login(request):
