@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
-<ul class="list-articles">
-    {% for act in active %}
-    <li>
-        <h2>{{ act.title }}</h2>
-        <p> {{ act.content|linebreaks|truncatewords:15}} </p>
-        <div class="clear"></div>
-        <p class="link-read-post"><a href="{{ act.get_absolute_url }}">Посмотреть событие</a></p>
-    </li>
-    {% endfor %}
-</ul>
+<div class="article-panel" align="center">
+    <h1>Добро пожаловать на сайт уведомлений о событиях Колледжа</h1>
+</div>
+<div>
+    <p>
+        Этот сайт специально предназначен для учащихся, которые не смотрят события на табле в <a href="http://www.bobruisk.belstu.by/" target="_blank" title="На страницу кооледжа">колледже</a>.
+
+    </p>
+
+</div>
 {% endblock content %}
 
