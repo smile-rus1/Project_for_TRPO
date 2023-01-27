@@ -2,12 +2,17 @@ from django import forms
 from .models import *
 
 
-class UserForms(forms.Form):
-    name = forms.CharField(label="Имя")
-    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
-    password_second = forms.CharField(label="Повтор пароля" ,widget=forms.PasswordInput(attrs={"class": "form-input"}))
-    email = forms.EmailField(label="Email")
+"""
+Форма для добавления событий!
+"""
+class AddEvents(forms.Form):
+    title = forms.CharField(max_length=255, label="Название", widget=forms.TextInput(attrs={"class": "form-input"}))
+    slug = forms.SlugField(max_length=255, label="Slug", widget=forms.TextInput(attrs={"class": "form-input"}))
+    content = forms.CharField(widget=forms.Textarea(attrs={"cols": 60, "rows": 10}), label="Текст события",
+                              )
+    is_published = forms.BooleanField(label="Публикация", required=False, initial=True,
+                                      )
+    group = forms.ModelChoiceField(queryset=Groups.objects.all(), label="К какой группе принадлежит",
+                                   required=False, empty_label="Группы нет",
+                                   widget=forms.TextInput(attrs={"class": "form-input"}))
 
-    class Meta:
-        model = Activity
-        fields = ("name", "password", "password_second", "email")
