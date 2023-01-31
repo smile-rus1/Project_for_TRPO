@@ -8,9 +8,40 @@
 <div>
     <p>
         Этот сайт специально предназначен для учащихся, которые не смотрят события на табле в <a href="http://www.bobruisk.belstu.by/" target="_blank" title="На страницу кооледжа">колледже</a>.
-
     </p>
-
+    <p>
+        Для того чтобы посмотреть весь контент нужно зарегестрироваться или авторизоваться!
+    </p>
 </div>
+
+<ul class="list-articles">
+
+    {% for act in active %}
+    <li>
+       <div class="article-panel">
+            <p class="first">Группа {{ act.group }}</p>
+            <p class="last">Дата создания {{ act.create_date|date:"d-m-Y" }} </p>
+       </div>
+        {% if act.photo %}
+        <p>
+            <img class="img-article-left" src="{{ act.photo.url }}">
+        </p>
+        {% endif %}
+
+        <h2>{{ act.title }}</h2>
+        <p> {{ act.content|linebreaks|truncatewords:15}} </p>
+
+        <div class="clear"></div>
+        {% if not request.user.is_authenticated %}
+        <p class="link-read-post"><a href="{% url 'login' %}">Посмотреть событие</a></p>
+        {% else %}
+        <p class="link-read-post"><a href="{% url 'events' %}">Посмотреть событие</a></p>
+        {% endif %}
+    </li>
+
+    {% endfor %}
+</ul>
+
+
 {% endblock content %}
 

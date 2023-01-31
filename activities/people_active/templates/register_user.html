@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {% for f in form %}
+
+    <p>
+        <label class="form-label" for="{{ f.id_for_label }}">
+                {{ f.label }}
+        </label>
+        {{ f }}
+
+    </p>
+    <div class="form-error">
+        {{ f.errors }}
+    </div>
+
+    {% endfor %}
+    <button type="submit" style="font-size : 20px; width: 50%; height: 50px" >
+        Зарегестрироваться
+    </button>
+
+</form>
+
+
+{% endblock content %}

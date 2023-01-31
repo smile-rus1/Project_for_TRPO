@@ -5,16 +5,9 @@
 
 <h1>{{ title }}</h1>
 
-<form action="{% url 'add_page' %} " method="post">
+<form action="{% url 'add_page' %} " method="post" enctype="multipart/form-data">
     {% csrf_token %}
-<!-- Выравнивание + создание формы -->
-    <p>
-        <label class="form-label" for="{{ form.title.id_for_label }}">
-            {{ form.title.label }}:
-        </label>
-        {{ form.title }}
-    </p>
-    <div class="form-error"> {{ form.title.errors }}</div>
+
 
 <!-- пробегаемся циклом по forms и заполняем  данными из forms.py класса AddEvents-->
     {% for f in form %}
