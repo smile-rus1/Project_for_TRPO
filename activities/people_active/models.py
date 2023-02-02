@@ -14,7 +14,7 @@ class Activity(models.Model):
     update_date = models.DateTimeField(auto_now=True, verbose_name="дата изменения")
     is_published = models.BooleanField(default=True, verbose_name="Публикация")
     group = models.ForeignKey("Groups", on_delete=models.PROTECT, verbose_name="Группы")
-    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
 
     """
     Возвращает название статьи в админке и не только
@@ -54,16 +54,12 @@ class Groups(models.Model):
         ordering = ["name"]
 
 
-class ActivityDiscussion(models.Model):
-    message = models.CharField(max_length=30, db_index=True, verbose_name="Сообщение")
-    slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name="URL")
-    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+class DiscussionActive(models.Model):
+    message = models.CharField(max_length=500, db_index=True, verbose_name="Сообщение")
+    # user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE) # перестроить на модель Activity !
 
     def __str__(self):
         return self.message
-
-    def get_absolute_url(self):
-        return reverse("discussion", kwargs={"discussion_slug": self.slug})
 
     class Meta:
         verbose_name_plural = "Сообщения"
