@@ -9,9 +9,11 @@
     <p>
         Этот сайт специально предназначен для учащихся, которые не смотрят события на табле в <a href="http://www.bobruisk.belstu.by/" target="_blank" title="На страницу кооледжа">колледже</a>.
     </p>
+    {% if not request.user.is_authenticated %}
     <p>
         Для того чтобы посмотреть весь контент нужно зарегестрироваться или авторизоваться!
     </p>
+    {% endif %}
 </div>
 
 <ul class="list-articles">
