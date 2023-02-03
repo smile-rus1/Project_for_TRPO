@@ -53,7 +53,7 @@ class LoginUserForm(AuthenticationForm):
 
 class DiscussionForm(forms.ModelForm):
     class Meta:
-        model = ActivityDiscussion
+        model = DiscussionActive
         fields = ["message"]
 
         widgets = {
