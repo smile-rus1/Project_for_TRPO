@@ -31,16 +31,24 @@ class GroupsAdmin(admin.ModelAdmin):
     """
     prepopulated_fields = {"slug": ("name",)}
 
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
+
 """Реализовать потом"""
 class DiscussionAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
+    list_display = ("id", "message")
     list_display_links = ("id", "message")
     search_fields = ("message",)
-    prepopulated_fields = {"slug": ("message",)}
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Groups, GroupsAdmin)
-admin.site.register(ActivityDiscussion)
 
-# admin.site.register(ActivityDiscussion, DiscussionAdmin)
+admin.site.register(DiscussionActive, DiscussionAdmin)
