@@ -127,7 +127,7 @@ class DiscussionADD(DataMixin, CreateView):
 
 
 class Discussion(DataMixin, ListView):
-    model = ActivityDiscussion
+    model = DiscussionActive
     template_name = "discussion.html"
     context_object_name = "discussion"
 
@@ -142,7 +142,6 @@ class RegisterUser(DataMixin, CreateView):
     template_name = "register_user.html"
     form_class = RegisterUserForm
     success_url = reverse_lazy("login")
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
