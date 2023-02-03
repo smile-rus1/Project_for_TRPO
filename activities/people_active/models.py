@@ -56,7 +56,6 @@ class Groups(models.Model):
 
 class DiscussionActive(models.Model):
     message = models.CharField(max_length=500, db_index=True, verbose_name="Сообщение")
-    # user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE) # перестроить на модель Activity !
 
     def __str__(self):
         return self.message
