@@ -21,10 +21,11 @@
     </div>
 
     {% endfor %}
+{% if request.user.is_authenticated %}
     <button type="submit" style="font-size : 20px; width: 30%; height: 50px" >
         Написать
     </button>
-
+{% endif %}
 </form>
 
 
