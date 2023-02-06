@@ -57,7 +57,7 @@ class Groups(models.Model):
 class DiscussionActive(models.Model):
     message = models.CharField(max_length=500, db_index=True, verbose_name="Сообщение")
     name = models.CharField(max_length=100, db_index=True, verbose_name="Никнейм")
-    # date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания", null=True)
 
     def __str__(self):
         return self.message
