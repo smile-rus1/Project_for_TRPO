@@ -5,15 +5,17 @@
 
 <h1 align="center">{{ title }}</h1>
 {% for ds in discussion %}
-<div>
+<div class="article-panel">
     <h2>
         Написал {{ ds.name }}
     </h2>
     <p>
         {{ ds.message }}
     </p>
+    <p class="last">Дата создания {{ ds.date|date:"d-m-Y" }} </p>
 </div>
 {% endfor %}
+
 <div class="clear"></div>
 {% if request.user.is_authenticated %}
         <p class="link-read-post">
