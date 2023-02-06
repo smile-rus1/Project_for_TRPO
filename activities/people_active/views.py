@@ -110,20 +110,24 @@ def pageNotFound(request, exeption):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
 
-class DiscussionADD(DataMixin, CreateView):
-    form_class = DiscussionForm
-    template_name = "discussion_add.html"
-    success_url = reverse_lazy("discussion")
+def discussion_add(request):
+    if request.method == "POST":
+        form = DiscussionForm(request.POST)
+        if form.is_valid():
+            name = request.user
+            message = form.cleaned_data["message"]
+            DiscussionActive.objects.create(message=message, name=name)
+            return redirect("discussion")
+    else:
+        form = DiscussionForm()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        data_mixin_def = self.get_user_context(title="Написать сообщение")
+    context = {
+        "title": "Написать сообщение",
+        "form": form,
+        "menu": menu
+    }
 
-        return context | data_mixin_def
-
-    def form_valid(self, form):
-        user = form.save()
-        return redirect("discussion")
+    return render(request, "discussion_add.html", context=context)
 
 
 class Discussion(DataMixin, ListView):
