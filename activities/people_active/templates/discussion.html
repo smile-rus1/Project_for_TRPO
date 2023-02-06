@@ -7,13 +7,8 @@
 {% for ds in discussion %}
 <div>
     <h2>
-        Написал {{ user.first_name }}
+        Написал {{ ds.name }}
     </h2>
-    {% if request.user.is_superuser %}
-    <h4>
-        Логин {{ user.username }}
-    </h4>
-    {% endif %}
     <p>
         {{ ds.message }}
     </p>
