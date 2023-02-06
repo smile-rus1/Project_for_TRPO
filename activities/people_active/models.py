@@ -56,11 +56,12 @@ class Groups(models.Model):
 
 class DiscussionActive(models.Model):
     message = models.CharField(max_length=500, db_index=True, verbose_name="Сообщение")
-    # comments_user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, db_index=True, verbose_name="Никнейм")
+    # date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     def __str__(self):
         return self.message
 
     class Meta:
         verbose_name_plural = "Сообщения"
-        ordering = ["-message"]
+        ordering = ["message"]
