@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.shortcuts import redirect
 
 from .models import *
+from .utils import *
 
 
 """
@@ -57,7 +59,7 @@ class DiscussionForm(forms.ModelForm):
         fields = ["message"]
 
         widgets = {
-            "message": forms.Textarea(attrs={"cols": 60, "rows": 10})
+            "message": forms.Textarea(attrs={"cols": 60, "rows": 10}),
         }
 
     def clean_message(self):
