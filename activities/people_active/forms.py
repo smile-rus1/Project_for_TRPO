@@ -39,8 +39,8 @@ class AddEvents(forms.ModelForm):
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"class": "form-input"}))
-    password1 = forms.CharField(label="Введите пароль", widget=forms.TextInput(attrs={"class": "form-input"}))
-    password2 = forms.CharField(label="Повторите пароль", widget=forms.TextInput(attrs={"class": "form-input"}))
+    password1 = forms.CharField(label="Введите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
+    password2 = forms.CharField(label="Повторите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
     email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={"class": "form-input"}))
 
     class Meta:
@@ -50,7 +50,7 @@ class RegisterUserForm(UserCreationForm):
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"class": "form-input"}))
-    password = forms.CharField(label="Введите пароль", widget=forms.TextInput(attrs={"class": "form-input"}))
+    password = forms.CharField(label="Введите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
 
 
 class DiscussionForm(forms.ModelForm):

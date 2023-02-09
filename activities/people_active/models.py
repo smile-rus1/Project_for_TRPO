@@ -64,4 +64,4 @@ class DiscussionActive(models.Model):
 
     class Meta:
         verbose_name_plural = "Сообщения"
-        ordering = ["message"]
+        ordering = ["-date"]
