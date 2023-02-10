@@ -130,6 +130,26 @@ def discussion_add(request):
     return render(request, "discussion_add.html", context=context)
 
 
+def subscribe(request):
+    if request.method == "POST":
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            name_user = request.user
+            group_sub = form.cleaned_data["group_sub"]
+            Subscribe.objects.create(name_user=name_user, group_sub=group_sub)
+            return redirect("discussion")
+    else:
+        form = SubscribeForm()
+
+    context = {
+        "title": "Подписка",
+        "form": form,
+        "menu": menu
+    }
+
+    return render(request, "subscribes.html", context=context)
+
+
 class Discussion(DataMixin, ListView):
     model = DiscussionActive
     template_name = "discussion.html"
