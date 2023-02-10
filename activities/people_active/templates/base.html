@@ -63,7 +63,9 @@
                     <p>
                        <a href="{% url 'discussion' %}">Обсуждение пользователей</a>
                     </p>
-                    <p><a href="#">Подписки</a></p>
+                    {% if request.user.is_authenticated %}
+                    <p><a href="{% url 'subscribe' %}">Подписки</a></p>
+                    {% endif %}
                 </div>
                  <br>
                 <div>
