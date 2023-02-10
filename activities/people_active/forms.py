@@ -70,4 +70,8 @@ class DiscussionForm(forms.ModelForm):
         return message
 
 
+class SubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscribe
+        fields = ["group_sub"]
 
