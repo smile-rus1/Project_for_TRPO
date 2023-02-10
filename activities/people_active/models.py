@@ -65,3 +65,16 @@ class DiscussionActive(models.Model):
     class Meta:
         verbose_name_plural = "Сообщения"
         ordering = ["-date"]
+
+
+class Subscribe(models.Model):
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата подписки")
+    name_user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+    group_sub = models.ForeignKey("Groups", on_delete=models.CASCADE, verbose_name="Группы")
+
+    def __str__(self):
+        return self.date
+
+    class Meta:
+        verbose_name_plural = "Подписки на группы"
+        ordering = ["-date"]
