@@ -19,7 +19,6 @@ class ShowGroup(DataMixin, ListView):
     model = Groups
     template_name = "Group.html"
     context_object_name = "group"
-    allow_empty = False
 
     def get_queryset(self):
         return Activity.objects.filter(is_published=True)

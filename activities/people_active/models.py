@@ -9,7 +9,7 @@ class Activity(models.Model):
     title = models.CharField(max_length=30, verbose_name="Заголовок")
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name="URL")
     content = models.TextField(blank=True, verbose_name="Текст", null=True)
-    photo = models.ImageField(upload_to="photos/%Y/%M/%d/", verbose_name="Фото", null=True)# записывает в раздельные папки по классификаторам
+    photo = models.ImageField(upload_to="photos/%Y/%M/%d/", verbose_name="Фото", null=True)  # записывает в раздельные папки по классификаторам
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     update_date = models.DateTimeField(auto_now=True, verbose_name="дата изменения")
     is_published = models.BooleanField(default=True, verbose_name="Публикация")
@@ -35,7 +35,7 @@ class Activity(models.Model):
 
     class Meta:
         verbose_name_plural = "События"
-        ordering = ["-update_date", "create_date","title"]
+        ordering = ["-update_date", "create_date", "title"]
 
 
 class Groups(models.Model):
