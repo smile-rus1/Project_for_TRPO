@@ -130,18 +130,20 @@ def discussion_add(request):
 
 
 def subscribe(request):
+    subscr = Subscribe.objects.all()
     if request.method == "POST":
         form = SubscribeForm(request.POST)
         if form.is_valid():
             name_user = request.user
             group_sub = form.cleaned_data["group_sub"]
             Subscribe.objects.create(name_user=name_user, group_sub=group_sub)
-            return redirect("discussion")
+            return redirect("groups")
     else:
         form = SubscribeForm()
 
     context = {
         "title": "Подписка",
+        "subscribe": subscr,
         "form": form,
         "menu": menu
     }
