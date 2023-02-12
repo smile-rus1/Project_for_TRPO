@@ -75,3 +75,27 @@ class SubscribeForm(forms.ModelForm):
         model = Subscribe
         fields = ["group_sub"]
 
+
+class AddGroupForm(forms.ModelForm):
+    class Meta:
+        model = Groups
+        fields = ["name", "slug", "title"]
+
+        widgets = {
+            "name": forms.TextInput(),
+            "title": forms.Textarea(attrs={"cols": 60, "rows": 5}),
+        }
+
+    def clean_name(self):
+        content = self.cleaned_data["content"]
+        if len(content) > 10:
+            raise ValidationError("Вы привысили количество слов (MAX 10)")
+
+        return content
+
+    def clean_title(self):
+        content = self.cleaned_data["content"]
+        if len(content) > 200:
+            raise ValidationError("Вы привысили количество слов (MAX 200)")
+
+        return content

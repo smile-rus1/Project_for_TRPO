@@ -27,7 +27,7 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated  and request.user.is_superuser or request.user.is_staff %}
-                <li><a href="{% url 'add_page' %}">Добавить в ленту событий</a></li>
+<!--                <li><a href="{% url 'add_page' %}">Добавить в ленту событий</a></li>-->
                 <li class="last">
                     Привет администратор <a href="#">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
                 </li>
@@ -77,6 +77,15 @@
                     <a href="https://vk.com/gasakrus" target="_blank"><br><i>VK создателя</i></a>
                 </p>
             </li>
+            {% if request.user.is_superuser or request.user.is_stuff %}
+            <h4>Панелька для админа</h4>
+            <li>
+                <a href="{% url 'add_page' %}">Добавить событие в ленту</a>
+            </li>
+            <li>
+                <a href="{% url 'add_group' %}">Добавить новую группу</a>
+            </li>
+            {% endif %}
         </ul>
     </td>
 <!-- конец панель слева -->

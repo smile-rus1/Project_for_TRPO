@@ -13,6 +13,7 @@ urlpatterns = [
     path("discussion/", Discussion.as_view(), name="discussion"),
     path("discussion_add/", discussion_add, name="discussion_add"),
     path("subscribe/", subscribe, name="subscribe"),
+    path("add_group/", AddGroup.as_view(), name="add_group"),
 
     path("post/<slug:post_slug>/", ShowPostInfo.as_view(), name="post"),
     path("groups/<slug:group_slug>/", ShowAboutGroup.as_view(), name="show_group"), # информация внутри группы

@@ -39,9 +39,9 @@ class Activity(models.Model):
 
 
 class Groups(models.Model):
-    name = models.CharField(max_length=30, db_index=True, verbose_name="Название")
+    name = models.CharField(max_length=30, db_index=True, verbose_name="Название группы")
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name="URL")
-    title = models.TextField(blank=True, verbose_name="Текст")
+    title = models.TextField(blank=True, verbose_name="Описания группы")
 
     def __str__(self):
         return self.name
@@ -51,7 +51,7 @@ class Groups(models.Model):
 
     class Meta:
         verbose_name_plural = "Группы"
-        ordering = ["name"]
+        ordering = ["-id"]
 
 
 class DiscussionActive(models.Model):
