@@ -23,9 +23,6 @@
 
         <div class="clear"></div>
         <p class="link-read-post"><a href="{{ act.get_absolute_url }}">Посмотреть событие</a></p>
-        {% if request.user.is_superuser %}
-           <p class="first">Сделал пост {{ user.username }}</p>
-           {% endif %}
         {% endfor %}
 
 

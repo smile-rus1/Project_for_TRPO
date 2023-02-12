@@ -13,7 +13,7 @@ class Activity(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     update_date = models.DateTimeField(auto_now=True, verbose_name="дата изменения")
     is_published = models.BooleanField(default=True, verbose_name="Публикация")
-    group = models.ForeignKey("Groups", on_delete=models.PROTECT, verbose_name="Группы")
+    group = models.ForeignKey("Groups", on_delete=models.SET_DEFAULT, verbose_name="Группы", null=True, default=1)
     # user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
 
     """

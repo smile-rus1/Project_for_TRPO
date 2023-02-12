@@ -87,14 +87,14 @@ class AddGroupForm(forms.ModelForm):
         }
 
     def clean_name(self):
-        content = self.cleaned_data["content"]
+        content = self.cleaned_data["name"]
         if len(content) > 10:
             raise ValidationError("Вы привысили количество слов (MAX 10)")
 
         return content
 
     def clean_title(self):
-        content = self.cleaned_data["content"]
+        content = self.cleaned_data["title"]
         if len(content) > 200:
             raise ValidationError("Вы привысили количество слов (MAX 200)")
 
