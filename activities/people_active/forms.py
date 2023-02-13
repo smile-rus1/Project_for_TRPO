@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.shortcuts import redirect
 
 from .models import *
@@ -38,8 +39,11 @@ class AddEvents(forms.ModelForm):
 
 
 class RegisterUserForm(UserCreationForm):
+    validator_pass = RegexValidator(r'^[0-9a-zA-Z]*$', "Пароль должен состоять только из цифр и букв!")
+
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"class": "form-input"}))
-    password1 = forms.CharField(label="Введите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
+    password1 = forms.CharField(label="Введите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}),
+                                validators=[validator_pass], min_length=8, max_length=24)
     password2 = forms.CharField(label="Повторите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
     email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={"class": "form-input"}))
 
