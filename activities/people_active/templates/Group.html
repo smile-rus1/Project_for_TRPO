@@ -11,9 +11,6 @@
         <div class="clear"></div>
         <p class="link-read-post"><a href="{{ g.get_absolute_url }}">Информация</a></p>
         <p class="link-read-post"><a href="/subscribe">Подписаться</a></p>
-{% if request.user.is_superuser %}
-        <p> Группа создана: {{ user.username }}</p>
- {% endif %}
     </li>
     {% endfor %}
 </ul>
