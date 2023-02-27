@@ -2,14 +2,21 @@
 
 
 {% block content %}
+
+{% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% else %}
+            {{ form.non_field_errors }}
+    {% endif %}
+
 <ul class="list-articles">
 
     {% for act in active %}
     <li>
        <div class="article-panel">
             <p class="first">Группа {{ act.group }}</p>
-
-
             <p class="last">Дата создания {{ act.create_date|date:"d-m-Y" }} </p>
        </div>
         {% if act.photo %}

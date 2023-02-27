@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView
@@ -8,6 +10,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, \
     FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages, auth
 
 
 from .models import *
@@ -125,8 +128,12 @@ def discussion_add(request):
     if request.method == "POST":
         form = DiscussionForm(request.POST)
         if form.is_valid():
-            name = request.user
-            message = form.cleaned_data["message"]
+            name = request.user.first_name
+            if name:
+                message = form.cleaned_data["message"]
+            else:
+                name = request.user
+                message = form.cleaned_data["message"]
             DiscussionActive.objects.create(message=message, name=name)
             return redirect("discussion")
     else:
@@ -189,6 +196,7 @@ class RegisterUser(DataMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        messages.success(request=request, message="Поздравляем вы успешно вошли в систему")
         return redirect("events")
 
 

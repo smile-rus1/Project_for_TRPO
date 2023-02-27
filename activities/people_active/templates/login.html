@@ -7,6 +7,13 @@
 
 <form method="post">
     {% csrf_token %}
+{% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% else %}
+            {{ form.non_field_errors }}
+    {% endif %}
 
     <div class="form-errors">{{ form.non_field_errors }}</div>
     {% for f in form %}
@@ -17,7 +24,6 @@
                 {{ f.label }}
         </label>
         {{ f }}
-
     </p>
     <div class="form-error">
         {{ f.errors }}

@@ -6,6 +6,15 @@ html, body {
 	width: 100%;
 	color: #444;
 }
+div.error-window{
+    border: 1px solid #FF4343;
+    background: red;
+}
+div.success-window{
+    border: 1px solid #21DB56;
+    margin: 10px;
+    background: #AEFFC5;
+}
 
 
 a {
