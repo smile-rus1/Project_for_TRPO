@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.shortcuts import redirect
@@ -8,12 +8,10 @@ from .models import *
 from .utils import *
 
 
-"""
-Форма для добавления событий!
-"""
-
-
 class AddEvents(forms.ModelForm):
+    """
+    Форма для добавления событий!
+    """
     class Meta:
         model = Activity
         fields = ["title", "slug", "content", "photo", "is_published", "group"]
@@ -103,3 +101,14 @@ class AddGroupForm(forms.ModelForm):
             raise ValidationError("Вы привысили количество слов (MAX 200)")
 
         return content
+
+
+class UserProfileForms(UserChangeForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-input"}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-input"}))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-input", "readonly": True}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-input", "readonly": True}))
+
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "username", "email")
