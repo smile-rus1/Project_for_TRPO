@@ -209,3 +209,23 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect("home")
+
+
+def profile(request):
+    if request.method == "POST":
+        form = UserProfileForms(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+        else:
+            print(form.errors)
+    else:
+        form = UserProfileForms(instance=request.user)
+
+    context = {
+        "title": "Профиль",
+        "menu": menu,
+        "form": form,
+    }
+
+    return render(request, "profile.html", context=context)
