@@ -29,12 +29,12 @@
                 {% if request.user.is_authenticated  and request.user.is_superuser or request.user.is_staff %}
 <!--                <li><a href="{% url 'add_page' %}">Добавить в ленту событий</a></li>-->
                 <li class="last">
-                    Привет администратор <a href="#">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
+                    Привет администратор <a href="{% url 'profile' %}">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
                 </li>
                 {% else %}
                     {% if request.user.is_authenticated %}
                 <li class="last">
-                    Привет <a href="#">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
+                    Привет <a href="{% url 'profile' %}">{{ user.username }}</a> | <a href="{% url 'logout' %}">Выйти</a>
                 </li>
                 {% else %}
                 <li>
