@@ -70,10 +70,10 @@ class DiscussionActive(models.Model):
 class Subscribe(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name="Дата подписки")
     name_user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
-    group_sub = models.ForeignKey("Groups", on_delete=models.CASCADE, verbose_name="Группы")
+    group_sub = models.ForeignKey("Groups", on_delete=models.CASCADE, verbose_name="Группы", unique=True)
 
     def __str__(self):
-        return self.date
+        return self.group_sub.name
 
     class Meta:
         verbose_name_plural = "Подписки на группы"
