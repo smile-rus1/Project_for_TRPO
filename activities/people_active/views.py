@@ -155,8 +155,17 @@ def subscribe(request):
         if form.is_valid():
             name_user = request.user
             group_sub = form.cleaned_data["group_sub"]
-            Subscribe.objects.create(name_user=name_user, group_sub=group_sub)
-            return redirect("groups")
+            count_sub = Subscribe.objects.filter(group_sub=group_sub).count()
+            print(count_sub)
+
+            if count_sub > 0:
+                return redirect("subscribe")
+
+            else:
+                Subscribe.objects.create(name_user=name_user, group_sub=group_sub)
+
+            return redirect("profile")
+
     else:
         form = SubscribeForm()
 
@@ -168,6 +177,38 @@ def subscribe(request):
     }
 
     return render(request, "subscribes.html", context=context)
+
+
+def unsubscribe(request):
+    unsubscr = Subscribe.objects.all()
+
+    if request.method == "POST":
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            group_sub = form.cleaned_data["group_sub"]
+
+            count_sub = Subscribe.objects.filter(group_sub=group_sub).count()
+            print(count_sub)
+            if count_sub <= 0:
+                return redirect("unsubscribe")
+
+            else:
+                Subscribe.objects.filter(group_sub=group_sub).delete()
+
+            return redirect("profile")
+        else:
+            form = SubscribeForm()
+    else:
+        form = SubscribeForm()
+
+    context = {
+        "title": "Отписаться",
+        "unsubscr": unsubscr,
+        "form": form,
+        "menu": menu
+    }
+
+    return render(request, "unsubscribe.html", context=context)
 
 
 class Discussion(DataMixin, ListView):
@@ -230,23 +271,14 @@ def profile(request):
     else:
         form = UserProfileForms(instance=request.user)
 
+    model = Subscribe.objects.all()
+
     context = {
         "title": "Профиль",
         "menu": menu,
         "form": form,
+        "model": model,
+
     }
 
     return render(request, "profile.html", context=context)
-
-
-class UserSubscribes(DataMixin, ListView):
-    model = Subscribe
-    template_name = "user_subscribes.html"
-    context_object_name = "subscribes"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        data_mixin_def = self.get_user_context(title="Подписки")
-
-        return context | data_mixin_def
-
