@@ -77,6 +77,28 @@ class SubscribeForm(forms.ModelForm):
         model = Subscribe
         fields = ["group_sub"]
 
+    # def clean_group_sub(self):
+    #     group_sub = self.cleaned_data["group_sub"]
+    #     count_sub = Subscribe.objects.filter(group_sub=group_sub).count()
+    #     if count_sub > 0:
+    #         raise ValidationError("Вы уже подписаны на эту группу")
+    #
+    #     return group_sub
+
+
+class UnsubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscribe
+        fields = ["group_sub"]
+
+    # def clean_group_sub(self):
+    #     group_sub = self.cleaned_data["group_sub"]
+    #     count_sub = Subscribe.objects.filter(group_sub=group_sub).count()
+    #     if count_sub < 0:
+    #         raise ValidationError("Вы на эту группу не подписаны")
+    #
+    #     return group_sub
+
 
 class AddGroupForm(forms.ModelForm):
     class Meta:
