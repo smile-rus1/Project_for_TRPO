@@ -15,6 +15,7 @@ urlpatterns = [
     path("subscribe/", subscribe, name="subscribe"),
     path("add_group/", AddGroup.as_view(), name="add_group"),
     path("profile/", profile, name="profile"),
+    path("user_subscribes/", UserSubscribes.as_view(), name="user_subscribes"),
 
     path("post/<slug:post_slug>/", ShowPostInfo.as_view(), name="post"),
     path("groups/<slug:group_slug>/", ShowAboutGroup.as_view(), name="show_group"), # информация внутри группы
