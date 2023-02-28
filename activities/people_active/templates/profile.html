@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <form action="" method="post">
     {% csrf_token %}
     <p>
@@ -31,10 +32,16 @@
     </button>
 
 </form>
-<form action="{% url 'user_subscribes' %}">
-        <input type="submit" value="Подписки" style="font-size : 20px; width: 30%; height: 30px" >
-</form>
-<!--<p><input placeholder="{{request.user.first_name}}"></p>-->
 
+
+<h1>Подписки на группы</h1>
+
+{% for subscr in model %}
+
+<form action="/unsubscribe">
+<p> {{ subscr }} <input type="submit" value="Отписаться"></p>
+</form>
+
+{% endfor %}
 
 {% endblock %}
