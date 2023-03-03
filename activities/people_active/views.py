@@ -282,3 +282,12 @@ def profile(request):
     }
 
     return render(request, "profile.html", context=context)
+
+
+def help_system(request):
+    context = {
+        "title": "Руководство пользователю",
+
+    }
+
+    return render(request, "help_system_user.html", context=context)
